@@ -166,3 +166,12 @@ a.secondary {
     filter: invert();
   }
 }
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 2rem;
+  font-weight: bold;
+}
