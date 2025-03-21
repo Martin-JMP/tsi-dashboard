@@ -1,0 +1,34 @@
+name: Deploy to docker hub
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      REGISTRY: docker.io
+      IMAGE_NAME: mattlpt/tsi-dashboard
+      K8S_NAMESPACE: default
+      DEPLOYMENT_NAME: tsi-dashboard-deployment
+      SERVICE_NAME: tsi-dashboard-service
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        run: |
+          docker buildx build --platform linux/amd64 -t $REGISTRY/$IMAGE_NAME:latest . --push
