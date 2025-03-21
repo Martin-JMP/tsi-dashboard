@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# France-Latvia Dashboard
+
+This dashboard provides a comprehensive comparison of key indicators between France and Latvia across multiple domains including economics, demographics, society, and environment.
+
+## Features
+
+- **Home Page Overview**: Quick glance at key statistics across all categories
+- **Economic Indicators**: Detailed GDP, inflation, and financial metrics
+- **Labor Market**: Employment statistics and workforce data
+- **Society & Quality of Life**: Health, education, and social development metrics
+- **Environment & Energy**: Sustainability and environmental performance data
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18.0 or higher
+- npm or yarn
+
+### Installation
+
+1. Clone this repository
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Install the required chart libraries:
+```bash
+npm install chart.js react-chartjs-2
+# or
+yarn add chart.js react-chartjs-2
+```
+
+4. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Data Source
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The dashboard uses data from a CSV file located at `src/app/DB/LIFE KPI(PIB...) FRANCE LATVIA.csv`. The data includes:
 
-## Learn More
+- Demographics (population, median age, birth rate)
+- Economy (GDP, inflation, unemployment)
+- Society (life expectancy, education, healthcare)
+- Environment (emissions, renewable energy, forest coverage)
 
-To learn more about Next.js, take a look at the following resources:
+## Extending the Dashboard
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Adding New Data
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To add new data points:
 
-## Deploy on Vercel
+1. Edit the CSV file in `src/app/DB/`
+2. Follow the format: `Group KPI;Indicator;France;Latvia`
+3. The dashboard components will automatically update to reflect the new data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Creating New Visualizations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You can extend the dashboard by:
+
+1. Creating new components in the `components` directory
+2. Using the data utilities from `utils/data.ts` to parse and process CSV data
+3. Adding new pages in the app directory following the Next.js file structure
+
+## Technologies Used
+
+- Next.js 15.2
+- React 19
+- TypeScript
+- CSS Modules
+- Chart.js (recommended for adding charts)
+
+## Project Structure
+
+- `/src/app/components` - Reusable UI components
+- `/src/app/utils` - Data processing utilities
+- `/src/app/DB` - Data sources
+- `/src/app/[page]` - Individual page components
+
+## License
+
+This project is open source and available for academic and educational purposes.
