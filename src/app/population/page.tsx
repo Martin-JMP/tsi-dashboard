@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
-import GDPChart from './components/GDPChart';
 import { usePathname } from 'next/navigation';
-import './styles/navigation.css';
+import '../styles/navigation.css';
+import PopulationChart from '../components/PopulationChart';
 
-export default function Home() {
+export default function PopulationPage() {
   const pathname = usePathname();
 
   return (
@@ -30,7 +30,7 @@ export default function Home() {
       </nav>
 
       <div className="flex justify-center items-center mt-8">
-        <GDPChart />
+        <PopulationChart />
       </div>
     </div>
   );

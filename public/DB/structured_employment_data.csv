@@ -1,0 +1,22 @@
+Sector,Age_15_24,Age_25_49,Age_50_plus,Female,Male,Total_Employment,Percentage
+Agriculture,2.7,1.8,3.6,1.4,3.5,670.0,2.5
+Industrie,14.0,13.5,12.9,8.0,18.3,3616.0,13.3
+Construction,6.7,6.9,6.1,1.6,11.4,1808.0,6.7
+Tertiaire,73.7,76.4,76.2,87.8,65.1,20640.0,76.1
+   Commerce,20.1,12.7,10.6,12.4,13.0,3444.0,12.7
+   Transports,4.6,5.2,5.6,2.7,7.7,1432.0,5.3
+   Hébergement et restauration,8.9,3.7,3.0,3.9,3.9,1058.0,3.9
+   Information et communication,2.2,3.5,2.3,1.9,4.1,827.0,3.0
+"   Finance, assurance, immobilier",2.9,4.9,4.5,5.4,3.9,1244.0,4.6
+   Services principalement aux entreprises,8.5,10.6,9.2,9.7,10.3,2713.0,10.0
+   Administration publique,5.3,8.6,11.0,9.9,8.3,2463.0,9.1
+   Enseignement,4.0,7.2,7.8,10.1,4.4,1938.0,7.1
+   Santé,4.9,7.5,7.2,11.0,3.6,1940.0,7.2
+"   Hébergement médico-social, action sociale",6.0,7.1,8.4,12.9,2.3,2020.0,7.4
+   Services aux ménages,6.3,5.2,6.6,7.8,3.8,1560.0,5.7
+Activité indéterminée,2.9,1.3,1.2,1.2,1.7,388.0,1.4
+Ensemble,100.0,100.0,100.0,100.0,100.0,27122.0,100.0
+"Champ : France hors Mayotte, population des ménages, personnes en emploi.",,,,,,,
+"Lecture : en moyenne en 2018, 87,8 % des femmes ayant un emploi travaillent dans le secteur tertiaire.",,,,,,,
+Note : les intérimaires sont classés dans le secteur utilisateur.,,,,,,,
+"Source : Insee, enquête Emploi.",,,,,,,

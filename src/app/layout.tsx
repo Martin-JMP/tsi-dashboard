@@ -1,41 +1,26 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import styles from './layout.module.css'
-import Link from 'next/link'
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'France-Latvia Dashboard',
-  description: 'Economic and Labor Market Dashboard',
-};
+  title: 'France-Latvia Economic Dashboard',
+  description: 'Economic indicators comparison between France and Latvia',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <nav className={styles.nav}>
-          <Link href="/">Overview</Link>
-          <Link href="/labor">Labor Market</Link>
-          <Link href="/economy">Economy</Link>
-        </nav>
-        <main className={styles.main}>
+    <html lang="en" data-theme="light" className="light">
+      <body className={inter.className}>
+        <main className="container mx-auto px-4 py-8">
           {children}
         </main>
       </body>
     </html>
-  );
+  )
 }

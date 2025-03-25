@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
-import GDPChart from './components/GDPChart';
 import { usePathname } from 'next/navigation';
-import './styles/navigation.css';
+import '../styles/navigation.css';
+import UnemploymentChart from '../components/UnemploymentChart';
 
-export default function Home() {
+export default function EmploymentPage() {
   const pathname = usePathname();
 
   return (
@@ -29,8 +29,12 @@ export default function Home() {
         </ul>
       </nav>
 
-      <div className="flex justify-center items-center mt-8">
-        <GDPChart />
+      <div className="container mx-auto p-4">
+        <div className="card bg-base-100 shadow-xl p-6">
+          <div className="card-body">
+            <UnemploymentChart />
+          </div>
+        </div>
       </div>
     </div>
   );
