@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import type { ChartData, ChartOptions } from 'chart.js';
+import type { ChartOptions } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -33,11 +33,11 @@ const rawFranceGDP = [1595219345511.89, 1598889216566.23, 1449392222971.45, 1496
 const rawLatviaGDP = [5608208784.9401, 5799465288.41246, 6349481006.53278, 6974112951.26891, 7324192889.74297, 7761252607.18424, 8190888739.6463, 9249030241.01864, 11244337719.8377, 13827070378.5612, 16306935905.4138, 20434922247.3037, 29420499247.7089, 34135200994.0067, 25691530442.035, 23468324572.3343, 26575547900.8247, 27116149948.6683, 29152128167.8438, 30277203767.4058, 26344565876.8902, 27117105059.5075, 29391059767.4259, 33247935477.3576, 33099503950.847, 33379927434.6149, 38185125732.9451, 38018905782.397, 42247850064.5125];
 
 // Calculer les variations en pourcentage par rapport à 1995
-const percentageFranceGDP = rawFranceGDP.map((value, index) => 
+const percentageFranceGDP = rawFranceGDP.map((value, index) =>
   index === 0 ? 0 : ((value - rawFranceGDP[0]) / rawFranceGDP[0]) * 100
 );
 
-const percentageLatviaGDP = rawLatviaGDP.map((value, index) => 
+const percentageLatviaGDP = rawLatviaGDP.map((value, index) =>
   index === 0 ? 0 : ((value - rawLatviaGDP[0]) / rawLatviaGDP[0]) * 100
 );
 
@@ -191,7 +191,7 @@ export default function GDPChart() {
         <h2 className={styles.chartTitle}>
           GDP {showPercentage ? 'Growth Since 1995 (%)' : '(Current US$)'}
         </h2>
-        <button 
+        <button
           onClick={() => setShowPercentage(!showPercentage)}
           className={styles.toggleButton}
         >
@@ -199,7 +199,7 @@ export default function GDPChart() {
         </button>
       </div>
       <div className={styles.chartContent}>
-        <Line 
+        <Line
           ref={chartRef}
           data={getData()}
           options={{
@@ -209,7 +209,7 @@ export default function GDPChart() {
         />
       </div>
       <div className={styles.chartDescription}>
-        GDP at purchaser's prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products.
+        GDP at purchaser&#39;s prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products.
       </div>
     </div>
   );
