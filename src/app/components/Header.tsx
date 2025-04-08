@@ -33,14 +33,14 @@ export default function Header() {
             </Link>
 
             <Link 
-              href="/employment"
+              href="/labor-market"
               className={`inline-flex items-center px-6 py-2 text-lg font-medium rounded-lg transition-all duration-200 
-                ${pathname === '/employment' 
+                ${pathname === '/labor-market' 
                   ? 'bg-blue-600 text-white shadow-md' 
                   : 'text-gray-600 hover:bg-blue-50'
                 }`}
             >
-              Employment
+              Labor Market
             </Link>
           </div>
         </div>

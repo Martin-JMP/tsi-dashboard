@@ -2,9 +2,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import '../styles/navigation.css';
-import UnemploymentChart from '../components/UnemploymentChart';
+import EmploymentSectorChart from '../../app/components/EmploymentSectorChart';
 
-export default function EmploymentPage() {
+export default function EmploymentComparisonPage() {
   const pathname = usePathname();
 
   return (
@@ -26,13 +26,18 @@ export default function EmploymentPage() {
               Employment
             </Link>
           </li>
+          <li>
+            <Link href="/employment-comparison" className={`nav-link ${pathname === '/employment-comparison' ? 'active' : ''}`}>
+              Employment Comparison
+            </Link>
+          </li>
         </ul>
       </nav>
 
       <div className="container mx-auto p-4">
         <div className="card bg-base-100 shadow-xl p-6">
           <div className="card-body">
-            <UnemploymentChart />
+            <EmploymentSectorChart />
           </div>
         </div>
       </div>

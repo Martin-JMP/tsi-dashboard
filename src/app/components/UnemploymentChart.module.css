@@ -1,7 +1,6 @@
 .chartContainer {
-    width: 80%;
-    max-width: 80%;
-    height: 500px;
+    width: 100%;
+    height: 650px;  /* Augmenter la hauteur du graphique */
     margin: 0 auto;
     background-color: white;
     border-radius: 0.5rem;

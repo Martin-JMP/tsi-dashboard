@@ -1,0 +1,41 @@
+Sector_ID;Sector_Name;Country;Average_Salary_2023;Salary_Currency
+A;Agriculture, forestry and fishing;Latvia;1124;EUR
+A;Agriculture, forestry and fishing;France;2200;EUR
+B;Mining and quarrying;Latvia;1239;EUR
+B;Mining and quarrying;France;2400;EUR
+C;Manufacturing;Latvia;1070;EUR
+C;Manufacturing;France;2400;EUR
+D;Electricity, gas, steam and air conditioning supply;Latvia;1452;EUR
+D;Electricity, gas, steam and air conditioning supply;France;2600;EUR
+E;Water supply, sewerage, waste management;Latvia;1099;EUR
+E;Water supply, sewerage, waste management;France;2100;EUR
+F;Construction;Latvia;1048;EUR
+F;Construction;France;2100;EUR
+G;Wholesale and retail trade;Latvia;1008;EUR
+G;Wholesale and retail trade;France;2000;EUR
+H;Transportation and storage;Latvia;1072;EUR
+H;Transportation and storage;France;2500;EUR
+I;Accommodation and food service;Latvia;738;EUR
+I;Accommodation and food service;France;1900;EUR
+J;Information and communication;Latvia;1817;EUR
+J;Information and communication;France;4200;EUR
+K;Financial and insurance activities;Latvia;1928;EUR
+K;Financial and insurance activities;France;4800;EUR
+L;Real estate activities;Latvia;909;EUR
+L;Real estate activities;France;2600;EUR
+M;Professional, scientific and technical activities;Latvia;1416;EUR
+M;Professional, scientific and technical activities;France;4300;EUR
+N;Administrative and support services;Latvia;963;EUR
+N;Administrative and support services;France;2200;EUR
+O;Public administration and defence;Latvia;1313;EUR
+O;Public administration and defence;France;3100;EUR
+P;Education;Latvia;918;EUR
+P;Education;France;2400;EUR
+Q;Human health and social work;Latvia;1192;EUR
+Q;Human health and social work;France;2500;EUR
+R;Arts, entertainment and recreation;Latvia;951;EUR
+R;Arts, entertainment and recreation;France;2800;EUR
+S;Other service activities;Latvia;926;EUR
+S;Other service activities;France;2000;EUR
+TOTAL;All sectors;Latvia;1119;EUR
+TOTAL;All sectors;France;2600;EUR

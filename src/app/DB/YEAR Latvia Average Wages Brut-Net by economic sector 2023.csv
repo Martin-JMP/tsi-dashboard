@@ -1,0 +1,107 @@
+clau;Economic activity;Year;Wage
+Net;TOTAL;2023;1119.0
+Net;A Agriculture, forestry and fishing;2023;1124.0
+Net;A01 Crop and animal production, hunting and related service activities;2023;954.0
+Net;A02 Forestry and logging;2023;1265.0
+Net;A03 Fishing and aquaculture;2023;1117.0
+Net;B Mining and quarrying;2023;1239.0
+Net;B08 Other mining and quarrying;2023;1239.0
+Net;C Manufacturing;2023;1070.0
+Net;C10 Manufacture of food products;2023;972.0
+Net;C101 Processing and preserving of meat and production of meat products;2023;965.0
+Net;C102 Processing and preserving of fish, crustaceans and molluscs;2023;909.0
+Net;C103 Processing and preserving of fruit and vegetables;2023;1064.0
+Net;C104 Manufacture of vegetable and animal oils and fats;2023;925.0
+Net;C105 Manufacture of dairy products;2023;1072.0
+Net;C107 Manufacture of bakery and farinaceous products;2023;871.0
+Net;C108 Manufacture of other food products;2023;911.0
+Net;C11 Manufacture of beverages;2023;1127.0
+Net;C13 Manufacture of textiles;2023;736.0
+Net;C14 Manufacture of wearing apparel;2023;683.0
+Net;C15 Manufacture of leather and related products;2023;725.0
+Net;C16 Manufacture of wood and of products of wood and cork, except furniture, manufacture of articles of straw and plaiting materials;2023;1071.0
+Net;C17 Manufacture of paper and paper products;2023;1083.0
+Net;C18 Printing and reproduction of recorded media;2023;1208.0
+Net;C20 Manufacture of chemicals and chemical products;2023;1106.0
+Net;C21 Manufacture of basic pharmaceutical products and pharmaceutical preparations;2023;1701.0
+Net;C22 Manufacture of rubber and plastic products;2023;1043.0
+Net;C23 Manufacture of other non-metallic mineral products;2023;1327.0
+Net;C24 Manufacture of basic metals;2023;1128.0
+Net;C25 Manufacture of fabricated metal products, except machinery and equipment;2023;1088.0
+Net;C26 Manufacture of computer, electronic and optical products;2023;1439.0
+Net;C27 Manufacture of electrical equipment;2023;1145.0
+Net;C28 Manufacture of machinery and equipment n.e.c.;2023;1213.0
+Net;C29 Manufacture of motor vehicles, trailers and semi-trailers;2023;1209.0
+Net;C30 Manufacture of other transport equipment;2023;1287.0
+Net;C31 Manufacture of furniture;2023;916.0
+Net;C32 Other manufacturing;2023;871.0
+Net;C33 Repair and installation of machinery and equipment;2023;1077.0
+Net;D Electricity, gas, steam and air conditioning supply;2023;1452.0
+Net;D35 Electricity, gas, steam and air conditioning supply;2023;1452.0
+Net;E Water supply, sewerage, waste management and remediation activities;2023;1099.0
+Net;E36 Water collection, treatment and supply;2023;1187.0
+Net;E37 Sewerage;2023;1000.0
+Net;E38 Waste collection, treatment and disposal activities, materials recovery;2023;1106.0
+Net;E39 Remediation activities and other waste management services;2023;771.0
+Net;F Construction;2023;1048.0
+Net;F41 Construction of buildings;2023;1039.0
+Net;F42 Civil engineering;2023;1161.0
+Net;F43 Specialised construction activities;2023;977.0
+Net;G Wholesale and retail trade, repair of motor vehicles and motorcycles;2023;1008.0
+Net;G45 Wholesale and retail trade and repair of motor vehicles and motorcycles;2023;1044.0
+Net;G46 Wholesale trade, except of motor vehicles and motorcycles;2023;1307.0
+Net;G47 Retail trade, except of motor vehicles and motorcycles;2023;832.0
+Net;H Transportation and storage;2023;1072.0
+Net;H49 Land transport and transport via pipelines;2023;903.0
+Net;H50 Water transport;2023;2027.0
+Net;H51 Air transport;2023;2186.0
+Net;H52 Warehousing and support activities for transportation;2023;1180.0
+Net;H53 Postal and courier activities;2023;1041.0
+Net;I Accommodation and food service activities;2023;738.0
+Net;I55 Accommodation;2023;846.0
+Net;I56 Food and beverage service activities;2023;711.0
+Net;J Information and communication;2023;1817.0
+Net;J58 Publishing activities;2023;1143.0
+Net;J59 Motion picture, video and television programme production, sound recording and music publishing activities;2023;1082.0
+Net;J60 Programming and broadcasting activities;2023;1452.0
+Net;J61 Telecommunications;2023;1664.0
+Net;J62 Computer programming, consultancy and related activities;2023;2123.0
+Net;J63 Information service activities;2023;1453.0
+Net;K Financial and insurance activities;2023;1928.0
+Net;K64 Financial service activities, except insurance and pension funding;2023;2003.0
+Net;K65 Insurance, reinsurance and pension funding, except compulsory social security;2023;1864.0
+Net;K66 Activities auxiliary to financial services and insurance activities;2023;1757.0
+Net;L Real estate activities;2023;909.0
+Net;L68 Real estate activities;2023;909.0
+Net;M Professional, scientific and technical activities;2023;1416.0
+Net;M69 Legal and accounting activities;2023;1324.0
+Net;M70 Activities of head offices, management consultancy activities;2023;1806.0
+Net;M71 Architectural and engineering activities, technical testing and analysis;2023;1231.0
+Net;M72 Scientific research and development;2023;1594.0
+Net;M73 Advertising and market research;2023;1497.0
+Net;M74 Other professional, scientific and technical activities;2023;1304.0
+Net;M75 Veterinary activities;2023;975.0
+Net;N Administrative and support service activities;2023;963.0
+Net;N77 Rental and leasing activities;2023;1247.0
+Net;N78 Employment activities;2023;1221.0
+Net;N79 Travel agency, tour operator and other reservation service and related activities;2023;1245.0
+Net;N80 Security and investigation activities;2023;673.0
+Net;N81 Services to buildings and landscape activities;2023;798.0
+Net;N82 Office administrative, office support and other business support activities;2023;1234.0
+Net;O Public administration and defence, compulsory social security;2023;1313.0
+Net;O84 Public administration and defence, compulsory social security;2023;1313.0
+Net;P Education;2023;918.0
+Net;P85 Education;2023;918.0
+Net;Q Human health and social work activities;2023;1192.0
+Net;Q86 Human health activities;2023;1351.0
+Net;Q87 Residential care activities;2023;790.0
+Net;Q88 Social work activities without accommodation;2023;776.0
+Net;R Arts, entertainment and recreation;2023;951.0
+Net;R90 Creative, arts and entertainment activities;2023;829.0
+Net;R91 Libraries, archives, museums and other cultural activities;2023;853.0
+Net;R92 Gambling and betting activities;2023;1344.0
+Net;R93 Sports activities and amusement and recreation activities;2023;1032.0
+Net;S Other service activities;2023;926.0
+Net;S94 Activities of membership organisations;2023;1128.0
+Net;S95 Repair of computers and personal and household goods;2023;802.0
+Net;S96 Other personal service activities;2023;745.0

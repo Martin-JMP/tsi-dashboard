@@ -22,8 +22,8 @@ export default function PopulationPage() {
             </Link>
           </li>
           <li>
-            <Link href="/employment" className={`nav-link ${pathname === '/employment' ? 'active' : ''}`}>
-              Employment
+            <Link href="/labor-market" className={`nav-link ${pathname === '/labor-market' ? 'active' : ''}`}>
+              Labor Market
             </Link>
           </li>
         </ul>
