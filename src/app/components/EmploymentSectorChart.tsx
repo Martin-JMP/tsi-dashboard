@@ -72,10 +72,22 @@ const latviaSectorData = {
   'P': 79948, 'Q': 59961, 'R': 22644, 'S': 22644, 'TOTAL': 868633
 };
 
-export default function EmploymentSectorChart() {
+interface EmploymentSectorChartProps {
+  onSectorSelect?: (sectorId: string | null) => void;
+  selectedSector?: string | null;
+}
+
+export default function EmploymentSectorChart({ onSectorSelect, selectedSector }: EmploymentSectorChartProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  // Synchroniser l'état local avec le secteur sélectionné
+  useEffect(() => {
+    // Ensure selectedSector is not undefined before setting it
+    if (selectedSector !== undefined) {
+      setActiveCategory(selectedSector);
+    }
+  }, [selectedSector]);
 
   useEffect(() => {
     // Simuler un chargement pour maintenir une expérience utilisateur cohérente
@@ -93,12 +105,11 @@ export default function EmploymentSectorChart() {
 
   const sortedFrenchData = sortDataByValue(frenchSectorData);
   const sortedLatvianData = sortDataByValue(latviaSectorData);
-
   // Ajustement de l'opacité en fonction de la catégorie active
   const getBackgroundColors = (data: [string, number][]) => {
     return data.map(([sector]) => {
       const color = sectorColors[sector];
-      if (activeCategory === null) return color;
+      if (activeCategory === null || activeCategory === "TOTAL") return color;
       return sector === activeCategory ? color : color.replace('0.7', '0.2');
     });
   };
@@ -123,25 +134,32 @@ export default function EmploymentSectorChart() {
     }],
   };
 
+  const handleSectorClick = (event: any, elements: any, chart: any) => {
+    if (elements.length > 0) {
+      const element = elements[0];
+      const index = element.index;
+      const datasetLabel = chart.data.labels[index];
+      // Trouver la catégorie correspondante
+      const foundCategory = Object.entries(sectorNames).find(
+        ([_, name]) => name === datasetLabel
+      );
+      // S'assurer que la catégorie existe avant de la définir
+      const category = foundCategory ? foundCategory[0] : null;
+      const newCategory = activeCategory === category ? null : category;
+      setActiveCategory(newCategory);
+      onSectorSelect?.(newCategory);
+    } else {
+      setActiveCategory(null);
+      onSectorSelect?.(null);
+    }
+  };
+
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'right' as const,
-        labels: {
-          boxWidth: 15,
-          padding: 10,
-          font: {
-            size: 11
-          }
-        },
-        onClick: (_: any, legendItem: any) => {
-          const index = legendItem.index;
-          const data = sortedFrenchData[index]; // Utiliser French data comme référence
-          const category = data[0]; // Obtenir la catégorie (A, B, C, etc.)
-          setActiveCategory(activeCategory === category ? null : category);
-        }
+        display: false // Désactiver l'affichage de la légende
       },
       tooltip: {
         callbacks: {
@@ -177,22 +195,7 @@ export default function EmploymentSectorChart() {
         }
       }
     },
-    onClick: (event: any, elements: any, chart: any) => {
-      if (elements.length > 0) {
-        const element = elements[0];
-        const index = element.index;
-        const datasetLabel = chart.data.labels[index];
-        // Trouver la catégorie correspondante
-        const foundCategory = Object.entries(sectorNames).find(
-          ([_, name]) => name === datasetLabel
-        );
-        // S'assurer que la catégorie existe avant de la définir
-        const category = foundCategory ? foundCategory[0] : null;
-        setActiveCategory(activeCategory === category ? null : category);
-      } else {
-        setActiveCategory(null);
-      }
-    }
+    onClick: handleSectorClick,
   };
 
   if (isLoading) {
@@ -204,29 +207,93 @@ export default function EmploymentSectorChart() {
   }
 
   return (
-    <div className={styles.chartContainer}>
-      <div className={styles.chartsWrapper}>
-        <div className={styles.pieChartContainer}>
-          <h3 className={styles.countryTitle}>France</h3>
-          <div className={styles.pieChart}>
-            <Pie 
-              data={frenchPieData} 
-              options={chartOptions}
-              plugins={[ChartDataLabels]} // Ajout local du plugin
-            />
-          </div>
-        </div>
-        
+    <div className={styles.chartContainer}>      <div className={styles.chartsWrapper}>
+
         <div className={styles.pieChartContainer}>
           <h3 className={styles.countryTitle}>Latvia</h3>
           <div className={styles.pieChart}>
             <Pie 
               data={latvianPieData} 
               options={chartOptions}
-              plugins={[ChartDataLabels]} // Ajout local du plugin
+              plugins={[ChartDataLabels]}
             />
           </div>
         </div>
+
+        <div className={styles.topSectorsContainer}>
+          <div className={styles.topSectorsContent}>
+            <div className={styles.countryColumn}>
+              <h4 className={styles.columnTitle}>Top 5 Latvia</h4>
+              <ul className={styles.sectorList}>                {sortedLatvianData.slice(0, 5).map(([sector, value]) => {
+                  const total = sortedLatvianData.reduce((sum, [_, val]) => sum + val, 0);
+                  const percentage = ((value / total) * 100).toFixed(1);
+                  const isActive = sector === activeCategory;
+                  return (
+                    <li 
+                      key={sector} 
+                      className={styles.sectorItem}
+                      style={{
+                        backgroundColor: isActive ? sectorColors[sector] : sectorColors[sector].replace('0.7', '0.2'),
+                        color: '#1f2937',
+                        fontWeight: isActive ? 600 : 400
+                      }}
+                      onClick={() => {
+                        const newCategory = activeCategory === sector ? null : sector;
+                        setActiveCategory(newCategory);
+                        onSectorSelect?.(newCategory);
+                      }}
+                    >
+                      <span className={styles.sectorName}>{sectorNames[sector]}</span>
+                      <span className={styles.sectorPercentage}>{percentage}%</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+
+            <div className={styles.countryColumn}>
+              <h4 className={styles.columnTitle}>Top 5 France</h4>
+              <ul className={styles.sectorList}>                {sortedFrenchData.slice(0, 5).map(([sector, value]) => {
+                  const total = sortedFrenchData.reduce((sum, [_, val]) => sum + val, 0);
+                  const percentage = ((value / total) * 100).toFixed(1);
+                  const isActive = sector === activeCategory;
+                  return (
+                    <li 
+                      key={sector} 
+                      className={styles.sectorItem}
+                      style={{
+                        backgroundColor: isActive ? sectorColors[sector] : sectorColors[sector].replace('0.7', '0.2'),
+                        color: '#1f2937',
+                        fontWeight: isActive ? 600 : 400
+                      }}
+                      onClick={() => {
+                        const newCategory = activeCategory === sector ? null : sector;
+                        setActiveCategory(newCategory);
+                        onSectorSelect?.(newCategory);
+                      }}
+                    >
+                      <span className={styles.sectorName}>{sectorNames[sector]}</span>
+                      <span className={styles.sectorPercentage}>{percentage}%</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.pieChartContainer}>
+          <h3 className={styles.countryTitle}>France</h3>
+          <div className={styles.pieChart}>
+            <Pie 
+              data={frenchPieData} 
+              options={chartOptions}
+              plugins={[ChartDataLabels]}
+            />
+          </div>
+        </div>
+        
       </div>
     </div>
   );

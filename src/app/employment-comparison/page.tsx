@@ -1,11 +1,18 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import '../styles/navigation.css';
-import EmploymentSectorChart from '../../app/components/EmploymentSectorChart';
+import EmploymentSectorChart from '../components/EmploymentSectorChart';
+import SalaryComparisonChart from '../components/SalaryComparisonChart';
 
 export default function EmploymentComparisonPage() {
   const pathname = usePathname();
+  const [selectedSector, setSelectedSector] = useState<string | null>(null);
+
+  const handleSectorSelect = (sectorId: string | null) => {
+    setSelectedSector(sectorId);
+  };
 
   return (
     <div>
@@ -37,7 +44,17 @@ export default function EmploymentComparisonPage() {
       <div className="container mx-auto p-4">
         <div className="card bg-base-100 shadow-xl p-6">
           <div className="card-body">
-            <EmploymentSectorChart />
+            <div className="grid grid-rows-2 gap-4 h-full">
+              <div className="w-full h-[400px]">
+                <EmploymentSectorChart onSectorSelect={handleSectorSelect} />
+              </div>
+              <div className="w-full h-[400px]">
+                <SalaryComparisonChart 
+                  highlightedSector={selectedSector}
+                  onSectorChange={setSelectedSector}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

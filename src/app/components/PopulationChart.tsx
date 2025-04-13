@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import type { ChartData, ChartOptions } from 'chart.js';
+import type { ChartOptions } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -43,89 +43,16 @@ const percentageLatviaPopulation = rawLatviaPopulation.map((value, index) =>
   index === 0 ? 0 : ((value - rawLatviaPopulation[0]) / rawLatviaPopulation[0]) * 100
 );
 
-function calculateCorrelation(x: number[], y: number[]) {
-  const n = x.length;
-  let sum_x = 0;
-  let sum_y = 0;
-  let sum_xy = 0;
-  let sum_x2 = 0;
-  let sum_y2 = 0;
-
-  for (let i = 0; i < n; i++) {
-    sum_x += x[i];
-    sum_y += y[i];
-    sum_xy += x[i] * y[i];
-    sum_x2 += x[i] * x[i];
-    sum_y2 += y[i] * y[i];
-  }
-
-  const correlation = (n * sum_xy - sum_x * sum_y) /
-    Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
-
-  return correlation;
-}
-
 type ChartType = 'line';
 
-export default function PopulationChart() {
+interface PopulationChartProps {
+  selectedCountry: string | null;
+  onCountrySelect: (country: string | null) => void;
+}
+
+export default function PopulationChart({ selectedCountry, onCountrySelect }: PopulationChartProps) {
   const chartRef = useRef<ChartJS<ChartType>>(null);
   const [showPercentage, setShowPercentage] = useState(true);
-  const [showCorrelation, setShowCorrelation] = useState(false);
-
-  // Calcul de la corrélation
-  const correlation = calculateCorrelation(rawFrancePopulation, rawLatviaPopulation);
-
-  const getHeatmapData = () => {
-    return {
-      labels: ['Population Correlation'],
-      datasets: [{
-        label: 'France - Latvia Correlation',
-        data: [correlation],
-        backgroundColor: correlation > 0 
-          ? `rgba(0, 255, 0, ${Math.abs(correlation)})` 
-          : `rgba(255, 0, 0, ${Math.abs(correlation)})`,
-        borderColor: 'rgba(0, 0, 0, 0.1)',
-        borderWidth: 1,
-      }]
-    };
-  };
-
-  const heatmapOptions: ChartOptions<'bar'> = {
-    responsive: true,
-    maintainAspectRatio: false,
-    indexAxis: 'y',
-    scales: {
-      x: {
-        beginAtZero: true,
-        min: -1,
-        max: 1,
-        grid: {
-          display: false
-        },
-        ticks: {
-          callback: (value) => typeof value === 'number' ? value.toFixed(2) : value
-        }
-      },
-      y: {
-        grid: {
-          display: false
-        }
-      }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: (context) => {
-            const value = context.raw;
-            return `Correlation: ${typeof value === 'number' ? value.toFixed(4) : value}`;
-          }
-        }
-      },
-      legend: {
-        display: false
-      }
-    }
-  };
 
   const getData = () => ({
     labels: years,
@@ -142,6 +69,7 @@ export default function PopulationChart() {
         pointHoverBackgroundColor: '#0055A4',
         pointHoverBorderColor: '#fff',
         pointHoverBorderWidth: 2,
+        hidden: selectedCountry !== null && selectedCountry !== 'France'
       },
       {
         label: 'Latvia',
@@ -155,10 +83,10 @@ export default function PopulationChart() {
         pointHoverBackgroundColor: '#9E3039',
         pointHoverBorderColor: '#fff',
         pointHoverBorderWidth: 2,
+        hidden: selectedCountry !== null && selectedCountry !== 'Latvia'
       }
     ]
   });
-
   const options: ChartOptions<ChartType> = {
     responsive: true,
     maintainAspectRatio: false,
@@ -167,6 +95,10 @@ export default function PopulationChart() {
       intersect: false,
     },
     plugins: {
+      // Explicitly disable datalabels for this line chart
+      datalabels: {
+        display: false
+      },
       tooltip: {
         enabled: true,
         position: 'nearest',
@@ -205,12 +137,32 @@ export default function PopulationChart() {
             borderWidth: 1,
             borderDash: [5, 5],
             display: false,
+          },
+          year1991Line: {
+            type: 'line',
+            scaleID: 'x',
+            value: years.indexOf('1991'),
+            borderColor: 'rgba(255, 99, 132, 0.5)',
+            borderWidth: 2,
+            borderDash: [5, 5],
+            label: {
+              content: '1991',
+              display: true,
+              position: 'start',
+              backgroundColor: 'rgba(255, 99, 132, 0.8)',
+              font: {
+                size: 11
+              }
+            }
           }
         }
       },
       legend: {
         position: 'top',
-        align: 'start',
+        align: 'center',
+        onClick: (e, legendItem, legend) => {
+          onCountrySelect(legendItem.text as string);
+        },
         labels: {
           usePointStyle: true,
           pointStyle: 'circle',
@@ -218,6 +170,18 @@ export default function PopulationChart() {
           font: {
             size: 14,
             weight: 'bold' as const,
+          },
+          generateLabels: (chart) => {
+            const datasets = chart.data.datasets;
+            return datasets.map((dataset, i) => ({
+              text: dataset.label || '',
+              fillStyle: dataset.backgroundColor as string,
+              strokeStyle: dataset.borderColor as string,
+              lineWidth: 2,
+              hidden: dataset.hidden,
+              index: i,
+              textDecoration: selectedCountry && dataset.label !== selectedCountry ? 'line-through' : undefined,
+            }));
           }
         }
       }
@@ -272,74 +236,29 @@ export default function PopulationChart() {
     <div className={styles.chartContainer}>
       <div className={styles.chartHeader}>
         <h2 className={styles.chartTitle}>
-          {showCorrelation 
-            ? 'Population Correlation (1960-2022)' 
-            : `Population ${showPercentage ? 'Change Since 1960 (%)' : 'Total'}`}
+          Population {showPercentage ? 'Change Since 1960 (%)' : 'Total'}
         </h2>
         <div className={styles.buttonGroup}>
-          {!showCorrelation && (
-            <button 
-              onClick={() => setShowPercentage(!showPercentage)}
-              className={styles.toggleButton}
-            >
-              Show {showPercentage ? 'Values' : 'Percentage'}
-            </button>
-          )}
           <button 
-            onClick={() => setShowCorrelation(!showCorrelation)}
-            className={`${styles.toggleButton} ${showCorrelation ? styles.active : ''}`}
+            onClick={() => setShowPercentage(!showPercentage)}
+            className={styles.toggleButton}
           >
-            {showCorrelation ? 'Show Chart' : 'Show Correlation'}
+            Show {showPercentage ? 'Values' : 'Percentage'}
           </button>
         </div>
       </div>
       <div className={styles.chartContent}>
-        {showCorrelation ? (
-          <div className={styles.correlationContainer}>
-            <div className={styles.correlationValue}>
-              Correlation coefficient: {correlation.toFixed(4)}
-            </div>
-            <div className={styles.correlationScale}>
-              <div className={styles.bar}>
-                {/* Barre de corrélation avec gradient et indicateur */}
-                <div
-                  className={styles.indicator}
-                  style={{ left: `${((correlation + 1) / 2) * 100}%` }}
-                />
-              </div>
-              <div className={styles.labels}>
-                <span>-1</span>
-                <span>0</span>
-                <span>1</span>
-              </div>
-            </div>
-            <div className={styles.correlationDescription}>
-              {correlation > 0.7 
-                ? 'Strong positive correlation: Both countries show similar population trends'
-                : correlation > 0.3 
-                  ? 'Moderate positive correlation: Some similarities in population trends'
-                  : correlation > -0.3 
-                    ? 'Weak correlation: Population trends are mostly independent'
-                    : correlation > -0.7 
-                      ? 'Moderate negative correlation: Opposing population trends'
-                      : 'Strong negative correlation: Population trends move in opposite directions'}
-            </div>
-          </div>
-        ) : (
-          <Line 
-            ref={chartRef}
-            data={getData()}
-            options={{
-              ...options,
-              onHover: handleHover
-            }}
-          />
-        )}
+        <Line 
+          ref={chartRef}
+          data={getData()}
+          options={{
+            ...options,
+            onHover: handleHover
+          }}
+        />
       </div>
       <div className={styles.chartDescription}>
-        {showCorrelation 
-          ? 'Correlation analysis between France and Latvia population data from 1960 to 2022.'
-          : 'Total population is based on counts of all residents regardless of legal status or citizenship.'}
+      This dataset shows the percentage change in population since 1960, highlighting long-term demographic growth trends.
       </div>
     </div>
   );

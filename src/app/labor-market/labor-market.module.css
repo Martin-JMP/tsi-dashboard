@@ -1,16 +1,16 @@
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 1rem;
     height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .tabsContainer {
     display: flex;
     justify-content: center;
-    margin-bottom: 1.5rem;
     flex-shrink: 0;
 }
 
@@ -48,9 +48,53 @@
     overflow: hidden;
 }
 
-.row {
-    flex: 1;
+/* Global section styles */
+.globalContainer {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Sector section styles */
+.sectorContainer {
+    display: grid;
+    grid-template-rows: minmax(0, 45%) minmax(0, 55%);
+    gap: 0.5rem;
+    padding: 0.5rem;
+    height: 100%;
+    overflow: hidden;
+}
+
+.employmentContainer {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0.5rem;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.salaryComparisonWrapper {
     display: flex;
+    justify-content: center;
+    gap: 1rem;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.employmentCharts {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 100%;
+    min-height: 0;
+}
+
+.pieChartWrapper {
+    flex: 1;
     height: 100%;
 }
 
@@ -58,71 +102,42 @@
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    flex: 1;
+    padding: 0.75rem;
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 .cardHeader {
     margin-bottom: 0.5rem;
-    padding: 0 0.5rem;
-    flex-shrink: 0;
 }
 
 .cardTitle {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #1f2937;
-    text-align: center;
 }
 
 .cardContent {
     flex: 1;
-    overflow: hidden;
+    min-height: 0;
 }
 
-.summary {
-    background-color: #f9fafb;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-.summaryTitle {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.summaryText {
-    font-size: 0.875rem;
-    color: #4b5563;
-    line-height: 1.5;
-}
-
-.stat {
-    font-weight: 600;
-}
-
-.france {
-    color: #0055A4;
-}
-
-.latvia {
-    color: #9E3039;
-}
-
+/* Salary comparison styles */
 .salaryComparisonContainer {
-    width: 65%;
+    width: 100%;
     background-color: #fff;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    padding: 10px;
-    margin-top: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem;
     text-align: center;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    height: 80px;
+    margin-top: 10px;
 }
 
 .salaryHeader {
@@ -131,6 +146,7 @@
     border-bottom: 1px solid #e5e7eb;
     display: flex;
     align-items: center;
+    width: 25%;
 }
 
 .salaryTitle {
@@ -146,6 +162,8 @@
     gap: 1rem;
     padding: 0.75rem;
     justify-content: space-between;
+    width: 100%;
+    height: 80px;
 }
 
 .countryBlock {
@@ -160,12 +178,22 @@
     background-color: rgba(0, 85, 164, 0.1);
     border-color: rgba(0, 85, 164, 0.3);
     width: 33%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
 }
 
 .countryLatvia {
     background-color: rgba(158, 48, 57, 0.1);
     border-color: rgba(158, 48, 57, 0.3);
     width: 33%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
 }
 
 .countryName {
@@ -176,9 +204,8 @@
 }
 
 .salaryValue {
-    font-size: 1.75rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-top: 2.0rem;
 }
 
 .differenceSection {
@@ -187,6 +214,13 @@
     border-radius: 0.5rem;
     border: 1px solid rgba(59, 130, 246, 0.3);
     width: 33%;
+}
+
+.differenceSection2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .differenceBar {
@@ -211,7 +245,7 @@
 }
 
 .differenceAmount {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #1e40af;
     margin: 0.3rem 0;
@@ -221,135 +255,81 @@
     display: inline-block;
     padding: 0.25rem 0.75rem;
     background-color: rgba(59, 130, 246, 0.1);
-    border-radius: 1rem;
+    border-radius: 2rem;
     font-size: 0.95rem;
     font-weight: 600;
     color: #1e40af;
     border: 1px solid rgba(59, 130, 246, 0.3);
-    margin-top: 0.3rem;
 }
 
-.insightBox {
-    padding: 0.75rem 1rem;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 0.5rem;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    font-size: 0.9rem;
-    color: #1e3a8a;
-    line-height: 1.5;
-    text-align: center;
-}
+/* Top differences card styles */
 
-/* Side-by-side containers for comparison and top differences */
-.comparisonRow {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-/* Top Differences Card */
-.topDifferencesContainer {
-  width: 35%;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.topDifferencesHeader {
-  padding: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.topDifferencesTitle {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1e3a8a;
-  margin: 0;
-  text-align: center;
-}
-
-.toggleButtons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.toggleButton {
-  padding: 0.35rem 1rem;
-  border-radius: 0.25rem;
-  border: 1px solid #3b82f6;
-  background-color: transparent;
-  color: #3b82f6;
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.toggleButton:hover {
-  background-color: rgba(59, 130, 246, 0.05);
-}
-
-.activeButton {
-  background-color: #3b82f6;
-  color: white;
-}
-
-.topDifferencesList {
-  padding: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.topDifferenceItem {
-  display: flex;
-  align-items: center;
-  padding: 0.65rem;
-  background-color: rgba(59, 130, 246, 0.05);
-  border-radius: 0.35rem;
-  border: 1px solid rgba(59, 130, 246, 0.1);
-}
-
-.topDifferenceRank {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #3b82f6;
-  background-color: rgba(59, 130, 246, 0.1);
-  width: 1.75rem;
-  height: 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin-right: 0.75rem;
-}
-
-.topDifferenceSector {
-  flex: 1;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #1e3a8a;
-}
-
-.topDifferenceValue {
-  font-size: 0.9rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
-  background-color: rgba(59, 130, 246, 0.08);
-}
 
 .positiveValue {
-  color: #044a78; /* green */
+    color: #044a78;
 }
 
 .negativeValue {
-  color: #dc2626; /* red */
+    color: #dc2626;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .sectorContainer {
+        grid-template-rows: minmax(0, 40%) minmax(0, 60%);
+    }
+
+    .employmentContainer {
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .employmentCharts {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .pieChartWrapper {
+        height: 50%;
+        min-height: 0;
+    }
+
+    .salaryComparisonWrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .salaryComparisonContainer,
+    .topDifferencesContainer {
+        width: 100%;
+        min-height: 0;
+    }
+
+    .salaryBody {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .countryBlock,
+    .differenceSection {
+        width: 100%;
+    }
+
+    .topDifferencesList {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    .tab {
+        padding: 0.35rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .sectorContainer {
+        padding: 0.25rem;
+    }
 }

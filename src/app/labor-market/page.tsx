@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import '../styles/navigation.css';
 import UnemploymentChart from '../components/UnemploymentChart';
+import PopulationChart from '../components/PopulationChart';
 import SalaryComparisonChart from '../components/SalaryComparisonChart';
 import EmploymentSectorChart from '../components/EmploymentSectorChart';
 import styles from './labor-market.module.css';
@@ -67,13 +68,7 @@ function SalaryComparisonCard({ sector, franceSalary, latviaSalary }: { sector: 
         </div>
 
         <div className={styles.differenceSection}>
-          <div className={styles.differenceBar}>
-            <div 
-              className={styles.differenceProgress} 
-              style={{width: `${Math.min(Math.abs(Number(percentageDiff)), 150)}%`}}
-            ></div>
-          </div>
-          <div>
+          <div className={styles.differenceSection2}>
             <div className={styles.differenceLabel}>DIFFERENCE</div>
             <div className={styles.differenceAmount}>
               {difference > 0 ? '+' : '-'}{Math.abs(difference).toLocaleString()} €
@@ -98,105 +93,19 @@ function SalaryComparisonCard({ sector, franceSalary, latviaSalary }: { sector: 
   );
 }
 
-// New component for displaying top differences
-function TopDifferencesCard({ 
-  sectorNames, 
-  franceSalaries, 
-  latviaSalaries,
-  onHighlightChange 
-}: { 
-  sectorNames: Record<string, string>; 
-  franceSalaries: Record<string, number>; 
-  latviaSalaries: Record<string, number>;
-  onHighlightChange: (sectors: string[]) => void;
-}) {
-  const [showHighest, setShowHighest] = useState(true);
-  
-  const differencesData = useMemo(() => {
-    const result = Object.keys(sectorNames)
-      .filter(key => key !== 'TOTAL') // Exclude total from the comparison
-      .map(sectorKey => {
-        const franceSalary = franceSalaries[sectorKey as keyof typeof franceSalaries];
-        const latviaSalary = latviaSalaries[sectorKey as keyof typeof latviaSalaries];
-        const difference = franceSalary - latviaSalary;
-        const percentageDiff = (difference / latviaSalary) * 100;
-        
-        return {
-          sectorKey,
-          sectorName: sectorNames[sectorKey as keyof typeof sectorNames],
-          percentageDiff,
-          franceSalary,
-          latviaSalary
-        };
-      });
-    
-    // Sort by percentage difference (absolute value for proper comparison)
-    if (showHighest) {
-      return result.sort((a, b) => b.percentageDiff - a.percentageDiff).slice(0, 3);
-    } else {
-      return result.sort((a, b) => a.percentageDiff - b.percentageDiff).slice(0, 3);
-    }
-  }, [sectorNames, franceSalaries, latviaSalaries, showHighest]);
-  
-  // Fix: Only call when showHighest changes instead of on every render
-  useEffect(() => {
-    const topSectorKeys = differencesData.map(item => item.sectorKey);
-    onHighlightChange(topSectorKeys);
-  }, [showHighest]); // Only depend on showHighest, not differencesData or onHighlightChange
-  
-  const handleToggleHighest = () => {
-    setShowHighest(true);
-  };
-  
-  const handleToggleLowest = () => {
-    setShowHighest(false);
-  };
-  
-  return (
-    <div className={styles.topDifferencesContainer}>
-      <div className={styles.topDifferencesHeader}>
-        <h3 className={styles.topDifferencesTitle}>
-          {showHighest ? 'Highest' : 'Lowest'} Salary Differences
-        </h3>
-        <div className={styles.toggleButtons}>
-          <button 
-            className={`${styles.toggleButton} ${showHighest ? styles.activeButton : ''}`}
-            onClick={handleToggleHighest}
-          >
-            High
-          </button>
-          <button 
-            className={`${styles.toggleButton} ${!showHighest ? styles.activeButton : ''}`}
-            onClick={handleToggleLowest}
-          >
-            Low
-          </button>
-        </div>
-      </div>
-      
-      <div className={styles.topDifferencesList}>
-        {differencesData.map((item, index) => (
-          <div key={item.sectorKey} className={styles.topDifferenceItem}>
-            <div className={styles.topDifferenceRank}>{index + 1}</div>
-            <div className={styles.topDifferenceSector}>{item.sectorName}</div>
-            <div className={styles.topDifferenceValue}>
-              <span className={item.percentageDiff > 0 ? styles.positiveValue : styles.negativeValue}>
-                {item.percentageDiff > 0 ? '+' : ''}{item.percentageDiff.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+
 
 export default function LaborMarketPage() {
   const pathname = usePathname();
-  const [activeTab, setActiveTab] = useState<'unemployment' | 'salary' | 'employment'>('unemployment');
+  const [activeTab, setActiveTab] = useState<'global' | 'sector'>('global');
   const [selectedSector, setSelectedSector] = useState<string>("TOTAL");
   const [highlightedSectors, setHighlightedSectors] = useState<string[]>([]);
-  
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+
+  const handleCountrySelect = useCallback((country: string | null) => {
+    setSelectedCountry(country === selectedCountry ? null : country);
+  }, [selectedCountry]);
+
   // Get data for the selected sector
   const getSelectedSectorData = () => {
     return {
@@ -208,13 +117,10 @@ export default function LaborMarketPage() {
   };
   
   const selectedSectorData = getSelectedSectorData();
+    const handleSectorSelection = useCallback((sector: string | null) => {
+    setSelectedSector(sector || "TOTAL");
+  }, []);
   
-  // Handle sector selection from chart
-  const handleSectorSelection = (sector: string) => {
-    setSelectedSector(sector);
-  };
-  
-  // Handle highlighted sectors from TopDifferencesCard
   const handleHighlightChange = useCallback((sectors: string[]) => {
     setHighlightedSectors(sectors);
   }, []);
@@ -245,77 +151,56 @@ export default function LaborMarketPage() {
         <div className={styles.tabsContainer}>
           <div className={styles.tabs}>
             <div 
-              className={`${styles.tab} ${activeTab === 'unemployment' ? styles.active : ''}`}
-              onClick={() => setActiveTab('unemployment')}
+              className={`${styles.tab} ${activeTab === 'global' ? styles.active : ''}`}
+              onClick={() => setActiveTab('global')}
             >
-              Unemployment Rate
+              Global
             </div>
             <div 
-              className={`${styles.tab} ${activeTab === 'salary' ? styles.active : ''}`}
-              onClick={() => setActiveTab('salary')}
+              className={`${styles.tab} ${activeTab === 'sector' ? styles.active : ''}`}
+              onClick={() => setActiveTab('sector')}
             >
-              Salary Comparison
-            </div>
-            <div 
-              className={`${styles.tab} ${activeTab === 'employment' ? styles.active : ''}`}
-              onClick={() => setActiveTab('employment')}
-            >
-              Employment
+              Sector
             </div>
           </div>
         </div>
 
         <div className={styles.chartGrid}>
-          {activeTab === 'unemployment' && (
-            <div className={styles.row}>
-              <div className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <h2 className={styles.cardTitle}>Unemployment Rate Trends (1991-2023)</h2>
-                </div>
-                <div className={styles.cardContent}>
-                  <UnemploymentChart />
-                </div>
-              </div>
+          {activeTab === 'global' && (
+            <div className={styles.globalContainer}>
+              <UnemploymentChart 
+                selectedCountry={selectedCountry}
+                onCountrySelect={handleCountrySelect}
+              />
+              <PopulationChart 
+                selectedCountry={selectedCountry}
+                onCountrySelect={handleCountrySelect}
+              />
             </div>
           )}
 
-          {activeTab === 'salary' && (
-            <div className={styles.row}>
-              <div className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <h2 className={styles.cardTitle}>Salary Comparison by Sector (2023)</h2>
-                </div>
-                <div className={styles.cardContent}>
-                  <SalaryComparisonChart 
+          {activeTab === 'sector' && (
+            <div className={styles.sectorContainer}>
+              <div className={styles.card}>                <div className={styles.cardContent}>                  <SalaryComparisonChart 
                     onSectorChange={handleSectorSelection} 
                     highlightedSectors={highlightedSectors}
+                    highlightedSector={selectedSector}
+                    onHighlightChange={handleHighlightChange}
                   />
-                  <div className={styles.comparisonRow}>
-                    <SalaryComparisonCard 
-                      sector={selectedSectorData.name}
-                      franceSalary={selectedSectorData.franceSalary}
-                      latviaSalary={selectedSectorData.latviaSalary}
-                    />
-                    <TopDifferencesCard 
-                      sectorNames={sectorNames}
-                      franceSalaries={franceSalaries}
-                      latviaSalaries={latviaSalaries}
-                      onHighlightChange={handleHighlightChange}
+                </div>
+              </div>              <div className={styles.employmentContainer}>
+                <div className={styles.salaryComparisonWrapper}>
+                  <SalaryComparisonCard 
+                    sector={selectedSectorData.name}
+                    franceSalary={selectedSectorData.franceSalary}
+                    latviaSalary={selectedSectorData.latviaSalary}
+                  />
+                </div>                <div className={styles.employmentCharts}>
+                  <div className={styles.pieChartWrapper}>                    <EmploymentSectorChart 
+                      onSectorSelect={handleSectorSelection}
+                      selectedSector={selectedSector}
                     />
                   </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'employment' && (
-            <div className={styles.row}>
-              <div className={styles.card}>
-                <div className={styles.cardHeader}>
-                  <h2 className={styles.cardTitle}>Employment by Sector (2023)</h2>
-                </div>
-                <div className={styles.cardContent}>
-                  <EmploymentSectorChart />
                 </div>
               </div>
             </div>
