@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+=======
+/* eslint-disable */
+'use client';
+import { useState, useEffect } from 'react';
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
 import { Bar } from 'react-chartjs-2';
 import styles from './SalaryComparisonChart.module.css';
 import {
@@ -22,8 +28,36 @@ ChartJS.register(
   ChartDataLabels
 );
 
+<<<<<<< HEAD
 // Sector names object for lookup
 const sectorNames: { [key: string]: string } = {
+=======
+// Type definitions for the salary data
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type SalaryData = {
+  Sector_ID: string;
+  Sector_Name: string;
+  Country: string;
+  Average_Salary_2023: number;
+  Salary_Currency: string;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type SectorData = {
+  id: string;
+  name: string;
+  franceSalary: number;
+  latviaSalary: number;
+};
+
+// Raw salary data for France and Latvia
+const sectors = [
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'TOTAL'
+];
+
+const sectorNames = {
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
   'A': 'Agriculture, forestry and fishing',
   'B': 'Mining and quarrying',
   'C': 'Manufacturing',
@@ -69,6 +103,7 @@ interface SalaryComparisonChartProps {
   onHighlightChange?: (sectors: string[]) => void;
 }
 
+<<<<<<< HEAD
 interface ProcessedData {
   id: string;
   name: string;
@@ -79,14 +114,44 @@ interface ProcessedData {
 
 type SortOrderType = 'asc' | 'desc' | 'default' | 'latvia';
 
+=======
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
 export default function SalaryComparisonChart({
   onSectorChange,
   highlightedSector,
   highlightedSectors = [],
   onHighlightChange
 }: SalaryComparisonChartProps) {
+<<<<<<< HEAD
   const [selectedSector, setSelectedSector] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrderType>('default');
+=======
+  // State for selected sector
+  const [selectedSector, setSelectedSector] = useState<string>("TOTAL");
+
+  // Process data to sort by France salary from lowest to highest
+  const processedData = sectors
+    .filter(sector => sector !== 'TOTAL') // Exclude TOTAL from the main chart
+    .map(sector => ({
+      id: sector,
+      name: sectorNames[sector as keyof typeof sectorNames],
+      franceSalary: franceSalaries[sector as keyof typeof franceSalaries],
+      latviaSalary: latviaSalaries[sector as keyof typeof latviaSalaries]
+    }))
+    .sort((a, b) => a.franceSalary - b.franceSalary); // Sort by France salary from lowest to highest
+
+  // Handle click on chart bars
+  const handleBarClick = (event: any, elements: any[]) => {
+    if (elements.length > 0) {
+      const index = elements[0].index;
+      const sectorId = processedData[index].id;
+      setSelectedSector(sectorId);
+      if (onSectorChange) {
+        onSectorChange(sectorId);
+      }
+    }
+  };
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
 
   // Process raw data into a format suitable for charting
   const processedData = useMemo<ProcessedData[]>(() => {
@@ -141,6 +206,7 @@ export default function SalaryComparisonChart({
   const chartData = useMemo(() => ({
     labels: (sortOrder ? sortedData : processedData).map(item => item.name),
     datasets: [
+<<<<<<< HEAD
       {        
         label: 'Latvia',
         data: (sortOrder ? sortedData : processedData).map(item => item.latviaSalary),
@@ -156,11 +222,23 @@ export default function SalaryComparisonChart({
           }
           return highlightedSector === item.id ? '#9E3039' : '#9E303940';
         }),
+=======
+      {
+        label: 'France',
+        data: processedData.map(item => item.franceSalary),
+        backgroundColor: processedData.map(item =>
+          highlightedSectors.length > 0 && !highlightedSectors.includes(item.id)
+            ? 'rgba(0, 85, 164, 0.3)' // More transparent if not highlighted
+            : 'rgba(0, 81, 255, 0.8)' // Original opacity if highlighted or no highlights
+        ),
+        borderColor: '#0055A4',
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
         borderWidth: 1,
         barPercentage: 0.7,
         categoryPercentage: 0.8
       },
       {
+<<<<<<< HEAD
         label: 'France',
         data: (sortOrder ? sortedData : processedData).map(item => item.franceSalary),
         backgroundColor: (sortOrder ? sortedData : processedData).map(item => {
@@ -175,6 +253,16 @@ export default function SalaryComparisonChart({
           }
           return highlightedSector === item.id ? '#0055A4' : '#0055A440';
         }),
+=======
+        label: 'Latvia',
+        data: processedData.map(item => item.latviaSalary),
+        backgroundColor: processedData.map(item =>
+          highlightedSectors.length > 0 && !highlightedSectors.includes(item.id)
+            ? 'rgba(158, 48, 57, 0.3)' // More transparent if not highlighted
+            : 'rgba(226, 0, 19, 0.8)' // Original opacity if highlighted or no highlights
+        ),
+        borderColor: '#9E3039',
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
         borderWidth: 1,
         barPercentage: 0.7,
         categoryPercentage: 0.8
@@ -281,6 +369,7 @@ export default function SalaryComparisonChart({
         }
       },      datalabels: {
         display: true,
+<<<<<<< HEAD
         color: (context: any) => {
           // Couleur noire pour les deux pays
           return 'black';
@@ -300,6 +389,14 @@ export default function SalaryComparisonChart({
         // Assurer que les étiquettes soient visibles en les positionnant au-dessus de chaque barre
         offset: 0,
         textAlign: 'center' as const
+=======
+        color: 'white',
+        align: 'end' as const,
+        anchor: 'end' as const,
+        formatter: function(value: number) {
+          return value + ' €';
+        }
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
       }
     },
     scales: {
@@ -330,6 +427,7 @@ export default function SalaryComparisonChart({
 
   return (
     <div className={styles.dashboardCard}>
+<<<<<<< HEAD
       <div className={styles.cardGlass}>        <div className={styles.chartHeader}>
           <div className={styles.titleContainer} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <h2 className={styles.title} style={{margin: 0, fontSize: '1.25rem', fontWeight: 600, color: '#1f2937'}}>Salary Comparison by Sector</h2>
@@ -362,6 +460,37 @@ export default function SalaryComparisonChart({
                sortOrder === 'desc' ? 'Difference ↓' : 
                'Latvia Salary ↑'}
             </button>
+=======
+      <div className={styles.cardGlass}>
+        <div className={styles.chartLayout}>
+          <div className={styles.mainChart}>
+            <Bar
+              data={chartData}
+              options={chartOptions}
+              height={300} // Définir la hauteur explicite à 300px
+              plugins={[
+                {
+                  id: 'customBarLabels',
+                  afterDatasetsDraw: function(chart: any) {
+                    const ctx = chart.ctx;
+                    chart.data.datasets.forEach((dataset: any, datasetIndex: number) => {
+                      const meta = chart.getDatasetMeta(datasetIndex);
+                      if (!meta.hidden) {
+                        meta.data.forEach((bar: any, index: number) => {
+                          const data = dataset.data[index].toString();
+                          ctx.fillStyle = '#333';
+                          ctx.font = '10px Arial';
+                          ctx.textAlign = 'center';
+                          ctx.textBaseline = 'bottom';
+                          ctx.fillText(data + ' €', bar.x, bar.y - 5);
+                        });
+                      }
+                    });
+                  }
+                }
+              ]}
+            />
+>>>>>>> 4b30032dea79e849ca953b00666b48c8daa3caaf
           </div>
         </div>        <div className={styles.mainChart}>
           <Bar 
