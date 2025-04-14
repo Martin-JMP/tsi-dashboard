@@ -1,0 +1,249 @@
+.container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #1f2937;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.historyButton, .resetButton {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.historyButton {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: white;
+}
+
+.resetButton {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+}
+
+.historyButton:hover, .resetButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.statsContainer {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+.stat h3 {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.stat p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.sessionSelect {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.sessionSelect label {
+  display: block;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.sessionSelect select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  color: #1f2937;
+  background-color: white;
+}
+
+.sessionSelect optgroup {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.sessionInfo {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.currentSession h3 {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.sessionDetails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+}
+
+.sessionDetails p {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+.heatmapContainer {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: calc(100vh - 250px);
+}
+
+@media (max-width: 640px) {
+  .sessionDetails {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 0.75rem;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h2 {
+  font-size: 1.25rem;
+  color: #1f2937;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: #1f2937;
+}
+
+.modalBody {
+  padding: 1.5rem;
+  max-height: calc(90vh - 100px);
+  overflow-y: auto;
+}
+
+.sessionGroup {
+  margin-bottom: 2rem;
+}
+
+.sessionGroup h3 {
+  font-size: 1rem;
+  color: #374151;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sessionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.historySession {
+  padding: 1rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.historySession:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sessionTime {
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.sessionDuration {
+  font-size: 0.875rem;
+  color: #6b7280;
+}

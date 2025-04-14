@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import '../styles/navigation.css';
 import styles from '../labor-market/labor-market.module.css';
@@ -7,38 +6,16 @@ import Navbar from '../components/Navbar';
 
 export default function MorePage() {
   const pathname = usePathname();
-    return (
-    <div>      <nav className="nav-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img 
-            src="/Logo_of_Transport_and_Telecommunication_Institute.png" 
-            alt="TSI Logo" 
-            style={{ 
-              height: '40px', 
-              marginLeft: '5px' 
-            }} 
-          />
-        </div>
-        <ul className="nav-list" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-          <li>
-            <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
-              Labor-Market
-            </Link>
-          </li>
-          <li>
-            <Link href="/more" className={`nav-link ${pathname === '/more' ? 'active' : ''}`}>
-              More
-            </Link>
-          </li>
-        </ul>
-        <div style={{ width: '40px' }}></div> {/* Spacer to balance the layout */}
-      </nav>
+  return (
+    <div>
+      <Navbar />
 
       <div className={styles.container}>
-        <div className={styles.card} style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>          <h1 className={styles.cardTitle} style={{ fontSize: '1.8rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+        <div className={styles.card} style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
+          <h1 className={styles.cardTitle} style={{ fontSize: '1.8rem', marginBottom: '1.5rem', textAlign: 'center' }}>
             France & Latvia Comparison Dashboard
           </h1>
-            <section style={{ marginBottom: '2rem' }}>
+          <section style={{ marginBottom: '2rem' }}>
             <h2 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: '#1f2937' }}>Project Summary</h2>
             <p style={{ lineHeight: '1.6', fontSize: '1rem', textAlign: 'justify' }}>
               <strong>Background:</strong> This dashboard represents an evolution from traditional data visualization to storytelling dashboards. 

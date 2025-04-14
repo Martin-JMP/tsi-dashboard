@@ -9,6 +9,7 @@ import SalaryComparisonChart from './components/SalaryComparisonChart';
 import EmploymentSectorChart from './components/EmploymentSectorChart';
 import Navbar from './components/Navbar';
 import styles from './labor-market/labor-market.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 // Raw salary data for France and Latvia
 const sectorNames = {
@@ -100,6 +101,80 @@ export default function Home() {
   const [selectedSector, setSelectedSector] = useState<string>("TOTAL");
   const [highlightedSectors, setHighlightedSectors] = useState<string[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Générer un ID de session unique
+    const sessionId = localStorage.getItem('currentSessionId') || uuidv4();
+    const sessionStartTime = localStorage.getItem('sessionStartTime') || Date.now().toString();
+    
+    // Sauvegarder l'ID de session et le temps de début si pas déjà fait
+    if (!localStorage.getItem('currentSessionId')) {
+      localStorage.setItem('currentSessionId', sessionId);
+      localStorage.setItem('sessionStartTime', sessionStartTime);
+    }
+
+    // Fonction pour obtenir l'IP du client
+    const getClientIP = async () => {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        return data.ip;
+      } catch (error) {
+        console.error('Error fetching IP:', error);
+        return 'unknown';
+      }
+    };
+
+    // Handler pour les clics
+    const handleClick = async (e: MouseEvent) => {
+      const clickData = {
+        x: e.pageX,
+        y: e.pageY,
+        value: 1,
+        timestamp: Date.now(),
+        sessionId,
+        ip: await getClientIP()
+      };
+
+      const storedData = localStorage.getItem('userClickData');
+      const currentData = storedData ? JSON.parse(storedData) : [];
+      const newData = [...currentData, clickData];
+      localStorage.setItem('userClickData', JSON.stringify(newData));
+    };    // Handler pour la fermeture de la fenêtre
+    const handleBeforeUnload = () => {
+      const sessionEndTime = Date.now();
+      const sessionStartTime = parseInt(localStorage.getItem('sessionStartTime') || '0', 10);
+      const sessionDuration = sessionEndTime - sessionStartTime;
+    // Sauvegarder les informations de session
+      const storedSessions = localStorage.getItem('sessionData');
+      const sessions = storedSessions ? JSON.parse(storedSessions) : [];
+      sessions.push({
+        sessionId,
+        startTime: sessionStartTime,
+        endTime: sessionEndTime,
+        duration: sessionDuration,
+        ip: localStorage.getItem('currentIP') || 'unknown'
+      });
+      localStorage.setItem('sessionData', JSON.stringify(sessions));
+
+      // Réinitialiser les données de session courante
+      localStorage.removeItem('currentSessionId');
+      localStorage.removeItem('sessionStartTime');
+    };
+
+    // Obtenir et sauvegarder l'IP au démarrage de la session
+    getClientIP().then(ip => {
+      localStorage.setItem('currentIP', ip);
+    });
+
+    document.addEventListener('click', handleClick);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   const handleCountrySelect = useCallback((country: string | null) => {
     setSelectedCountry(country === selectedCountry ? null : country);
