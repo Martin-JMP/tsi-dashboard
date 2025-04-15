@@ -30,7 +30,7 @@ export default function PopulationPage() {
       </nav>
 
       <div className="flex justify-center items-center mt-8">
-        <PopulationChart />
+        <PopulationChart  onCountrySelect={() => null} selectedCountry={null}/>
       </div>
     </div>
   );
