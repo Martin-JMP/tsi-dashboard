@@ -2,10 +2,8 @@
   display: flex;
   width: 100%;
   height: calc(100% - 2rem);
-  min-height: 378px;
   gap: 2rem;
   align-items: center;
-  padding: 1rem;
 }
 
 .pieChart {
@@ -15,18 +13,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 10px;
 }
 
 .topSectorsContainer {
-  flex: 0.8;
   height: 100%;
   display: flex;
   flex-direction: column;
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: 10px;
 }
 
 .topSectorsContent {
@@ -46,7 +43,7 @@
   font-size: 1rem;
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 1rem;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -54,7 +51,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 1.5rem;
+  margin-top: 10px;
   text-align: center;
 }
 

@@ -382,21 +382,6 @@ export default function SalaryComparisonChart({
             height={250}
           />
         </div>
-        <div className={styles.chartDescription} style={{
-          fontSize: '.75rem',
-          color: '#4b5563',
-          textAlign: 'left',
-          padding: '.75rem 1rem',
-          backgroundColor: '#3b82f60d',
-          border: '1px solid #3b82f61a',
-          borderRadius: '.375rem',
-          lineHeight: 1.4,
-          position: 'relative',
-          paddingLeft: '2rem',
-          marginBottom: '10px'
-        }}>
-          This chart compares average monthly salaries between Latvia and France across different economic sectors in 2023. 
-        </div>
       </div>
     </div>
   );

@@ -63,7 +63,8 @@
 /* Ajusté pour donner moins d'opacité à la heatmap */
 .heatmapContainer {
     width: 1900px;
-    height: 125%;
+    padding-left: 230px;
+    height: 147%;
     transform: scale(.8);
     transform-origin: center;
     position: relative;

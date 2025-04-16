@@ -12,18 +12,18 @@ export default function MorePage() {
 
       <div className={styles.container}>
         <div className={styles.card} style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-          <h1 className={styles.cardTitle} style={{ fontSize: '1.8rem', marginBottom: '1.5rem', textAlign: 'center' }}>
+          <h1 className={styles.cardTitle} style={{ fontSize: '20px', marginBottom: '10px', textAlign: 'center' }}>
             France & Latvia Comparison Dashboard
           </h1>
           <section style={{ marginBottom: '2rem' }}>
-            <h2 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: '#1f2937' }}>Project Summary</h2>
-            <p style={{ lineHeight: '1.6', fontSize: '1rem', textAlign: 'justify' }}>
+            <h2 style={{ fontSize: '18px', marginBottom: '1rem', color: '#1f2937' }}>Project Summary</h2>
+            <p style={{fontSize: '1rem', textAlign: 'justify' }}>
               <strong>Background:</strong> This dashboard represents an evolution from traditional data visualization to storytelling dashboards. 
               By combining effective visualization with a compelling narrative, we create a powerful and memorable data-driven story that resonates with the audience.
               While conventional dashboards often present disconnected charts lacking context, our approach combines data with narrative flow,
               enhancing understanding, engagement, and retention of information.
             </p>
-            <p style={{ lineHeight: '1.6', fontSize: '1rem', marginTop: '0.75rem', textAlign: 'justify' }}>
+            <p style={{fontSize: '1rem', marginTop: '0.75rem', textAlign: 'justify' }}>
               <strong>Goal:</strong> This project aims to take different datasets about France and Latvia, explore the data, and develop a dashboard 
               that tells a specific data-driven narrative using various visualisations. We've created a more intuitive tool that supports clearer insights 
               and more confident decision-making, minimizing misinterpretations and making complex economic relationships between the two countries more accessible.
@@ -31,7 +31,7 @@ export default function MorePage() {
           </section>
           
           <section style={{ marginBottom: '2rem' }}>
-            <h2 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: '#1f2937' }}>Team</h2>
+            <h2 style={{ fontSize: '18px', marginBottom: '1rem', color: '#1f2937' }}>Team</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <p><strong>Students:</strong></p>
               <ul style={{ listStyle: 'none', paddingLeft: '1rem' }}>
@@ -45,9 +45,9 @@ export default function MorePage() {
             </div>
           </section>
             <section>
-            <h2 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: '#1f2937' }}>Data Sources</h2>
+            <h2 style={{ fontSize: '18px', marginBottom: '1rem', color: '#1f2937' }}>Data Sources</h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: '20px', fontSize: '0.9rem' }}>
-              <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.4', marginTop: 0 }}>
+              <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.2', marginTop: 0 }}>
                 <li><a href="https://stat.gov.lv/en/statistics-themes/labour-market/wages-and-salaries/tables/dsv030-average-monthly-wages-and-salaries?themeCode=DS" target="_blank" rel="noopener noreferrer">Latvia Monthly Wages and Salaries</a></li>
                 <li><a href="https://www.insee.fr/fr/outil-interactif/5369554/salaires-par-profession-dans-le-secteur-prive" target="_blank" rel="noopener noreferrer">France Wages by Profession</a></li>
                 <li><a href="https://stat.gov.lv/en/statistics-themes/economy/national-accounts/tables/ikr020-value-added-and-its-share-total" target="_blank" rel="noopener noreferrer">Latvia Value Added by Sector</a></li>
@@ -55,12 +55,13 @@ export default function MorePage() {
                 <li><a href="https://www.insee.fr/fr/statistiques/4277700?sommaire=4318291#graphique-figure6" target="_blank" rel="noopener noreferrer">France Employment Statistics</a></li>
                 <li><a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD" target="_blank" rel="noopener noreferrer">World Bank GDP Per Capita</a></li>
               </ul>
-              <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.4', marginTop: 0 }}>
+              <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.2', marginTop: 0 }}>
                 <li><a href="https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG" target="_blank" rel="noopener noreferrer">World Bank Inflation Data</a></li>
                 <li><a href="https://data.worldbank.org/indicator/BX.TRF.PWKR.DT.GD.ZS" target="_blank" rel="noopener noreferrer">World Bank Remittances</a></li>
                 <li><a href="https://ec.europa.eu/eurostat/databrowser/view/PRC_HICP_MANR__custom_3761882/bookmark/table?lang=en&bookmarkId=4ad27e6f-358a-4a3d-82a0-587d69a833eb" target="_blank" rel="noopener noreferrer">Eurostat HICP Inflation Rate</a></li>
                 <li><a href="https://ec.europa.eu/eurostat/databrowser/view/nama_10_gdp/default/table?lang=en" target="_blank" rel="noopener noreferrer">Eurostat GDP Components</a></li>
                 <li><a href="https://www.oecd.org/en/data/indicators/employee-compensation-by-activity.html" target="_blank" rel="noopener noreferrer">OECD Employee Compensation</a></li>
+                <li><a href="https://ec.europa.eu/eurostat/databrowser/view/edat_lfse_03/default/table?lang=en&category=educ.educ_outc.edat.edat1" target="_blank" rel="noopener noreferrer">Population by educational attainment level, sex and age</a></li>
               </ul>
             </div>
           </section>

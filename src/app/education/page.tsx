@@ -10,7 +10,7 @@ export default function EducationPage() {
     <div>
       <Navbar />
 
-        <div className="w-full max-w-6xl">
+        <div className="w-full max-w-6xl" style={{ display: 'flex', justifyContent: 'center'}}>
           <EducationChart />
         </div>
     </div>
