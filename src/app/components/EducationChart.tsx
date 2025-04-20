@@ -438,6 +438,9 @@ export default function EducationChart() {
             return label;
           }
         }
+      },
+      datalabels: {
+        display: false // <-- Empêche l'affichage des valeurs sur le line chart
       }
     },
     scales: {
@@ -481,6 +484,9 @@ export default function EducationChart() {
             return `${level}: ${value.toFixed(1)}%`;
           }
         }
+      },
+      datalabels: {
+        display: false // Désactive l'affichage des valeurs sur la heatmap
       }
     },
     scales: {
