@@ -1,10 +1,10 @@
 # France-Latvia Socio-Economic Dashboard
 
 Members :
-- Martin JONCOURT ST63562
-- Matthieu LAPORTE ST63557
-- Julien LECORDIER ST63559
-- Kevin RIZK ST63555
+- Martin JONCOURT
+- Matthieu LAPORTE
+- Julien LECORDIER
+- Kevin RIZK
 
 
 ## Introduction
