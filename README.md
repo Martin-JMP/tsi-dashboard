@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# France-Latvia Socio-Economic Dashboard
+
+## Introduction
+
+In today’s data-driven society, the ability to compare socio-economic indicators across regions is critical for informed decision-making. This dashboard project presents a comparative analysis between France and Latvia, focusing on labor markets, wage trends, employment distribution, and economic activity.
+
+By leveraging storytelling dashboard techniques and modern web development technologies, the platform delivers an intuitive and interactive experience for users to explore key indicators and uncover insights.
+
+## Project Scope
+
+The main objectives of this dashboard are to:
+
+- Provide side-by-side comparisons of socio-economic metrics between France and Latvia.
+- Enable data filtering by time periods, sectors, and socio-professional categories.
+- Support stakeholders and policymakers in identifying patterns, disparities, and potential policy focus areas.
+
+**Data Sources:**
+- INSEE (France)
+- Central Statistical Bureau (Latvia)
+
+**Covered Indicators:**
+- Average wages
+- Employment rates
+- Employment distribution by sector
+- Value added by economic activity
+
+The project is built using HTML, CSS, JavaScript, and the Next.js React framework.
+
+## Methodology
+
+This dashboard is built using a storytelling approach, based on research by Lavalle et al. (2025), which ensures that all visualizations align with decision-makers’ mental models.
+
+### Steps:
+
+1. **Requirement Gathering** – Using the i* framework to map goals and analytical needs.
+2. **Data Structuring** – Organizing tasks and aligning datasets with analytical flow via tree structures and Knowledge Graphs.
+3. **Data Processing** – Using ETL processes to extract, clean, and load data efficiently.
+4. **Visualization Design** – Implementing intuitive charts (bar, line, etc.) and interactive filters to enable deeper exploration.
+
+This methodology enhances clarity, supports intuitive navigation, and allows scalability for future analytics (e.g., predictive modeling).
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- Yarn package manager
+
+### Installation
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
+git clone https://github.com/mattlpt/tsi-dashboard.git
+cd tsi-dashboard
+yarn install 
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
