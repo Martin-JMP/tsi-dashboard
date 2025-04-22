@@ -1,5 +1,12 @@
 # France-Latvia Socio-Economic Dashboard
 
+Members :
+- Martin JONCOURT ST63562
+- Matthieu LAPORTE ST63557
+- Julien LECORDIER ST63559
+- Kevin RIZK ST63555
+
+
 ## Introduction
 
 In today’s data-driven society, the ability to compare socio-economic indicators across regions is critical for informed decision-making. This dashboard project presents a comparative analysis between France and Latvia, focusing on labor markets, wage trends, employment distribution, and economic activity.
